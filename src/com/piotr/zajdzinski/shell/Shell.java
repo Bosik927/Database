@@ -17,6 +17,9 @@ public class Shell {
         System.out.println("5) Display objects using name filter");
         System.out.println("6) Help");
         System.out.println("7) Exit");
+        System.out.println("8) Calculate areas");
+        System.out.println("9) calculate valumes");
+        System.out.println("10) Calculate circumferences");
     }
 
     public int getOptionNumber() {
@@ -34,28 +37,59 @@ public class Shell {
         Scanner sc = new Scanner(System.in);
         try {
             int type = sc.nextInt();
-            ShapeType enumInstance = ShapeType.values()[type];
+            ShapeType enumInstance = ShapeType.values()[type-1];
+            System.out.println(enumInstance);
             if (enumInstance == null) {
                 System.out.println("Occur Exception: Incorrect option value!");
             } else {
-                System.out.println("Enter name");
+                System.out.print("Enter name: ");
                 String name = sc.next();
-                System.out.println("Enter id");
-                Long id = sc.nextLong();
+                System.out.print("Enter id: ");
+                long id = sc.nextLong();
 
-                if (enumInstance == ShapeType.TRIANGLE) {
-                    System.out.println("Triangle");
-                    DatabaseApp.shapes.add(new Triangle(name, id, 0, 0, 0));
+                if (enumInstance.equals(ShapeType.TRIANGLE)) {
+                    try {
+                        System.out.print("Enter a: ");
+                        double a = sc.nextDouble();
+                        System.out.print("Enter b: ");
+                        double b = sc.nextDouble();
+                        System.out.print("Enter c: ");
+                        double c = sc.nextDouble();
+                        DatabaseApp.shapes.add(new Triangle(name, id, a, b, c));
+                    }catch (Exception e){
+                        System.out.println("Occur Exception: Incorrect option value!");
+                    }
                 } else if (enumInstance == ShapeType.RECTANGLE) {
-                    System.out.println("Rectangle");
-                    DatabaseApp.shapes.add(new Rectangle(name, id, 0, 0));
+                    try {
+                        System.out.print("Enter a: ");
+                        double a = sc.nextDouble();
+                        System.out.print("Enter b: ");
+                        double b = sc.nextDouble();
+
+                        DatabaseApp.shapes.add(new Rectangle(name, id, a, b));
+                    }catch (Exception e){
+                        System.out.println("Occur Exception: Incorrect option value!");
+                    }
                 } else if (enumInstance == ShapeType.CUBOID) {
-                    System.out.println("Cuboid");
-                    DatabaseApp.shapes.add(new Cuboid(name, id, 0, 0, 0));
+                    try {
+                        System.out.print("Enter a: ");
+                        double a = sc.nextDouble();
+                        System.out.print("Enter b: ");
+                        double b = sc.nextDouble();
+                        System.out.print("Enter c: ");
+                        double c = sc.nextDouble();
+
+                        DatabaseApp.shapes.add(new Cuboid(name, id, a, b, c));
+                    }catch (Exception e){
+                        System.out.println("Occur Exception: Incorrect option value!");
+                    }
+
                 } else if (enumInstance == ShapeType.SPHERE) {
-                    System.out.println("Sphere");
-                    DatabaseApp.shapes.add(new Sphere(name, id, 0));
+                    System.out.print("Enter r: ");
+                    double r = sc.nextDouble();
+                    DatabaseApp.shapes.add(new Sphere(name, id, r));
                 }
+                System.out.println("End object creation");
             }
 
 
@@ -89,11 +123,11 @@ public class Shell {
     }
 
     public void displayByType() {
-        System.out.println("Choose object type: 1) Triangle 2) Rectangle 3) Cuboid 4) Sphere");
+        System.out.print("Choose object type: 1) Triangle 2) Rectangle 3) Cuboid 4) Sphere: ");
         Scanner sc = new Scanner(System.in);
         try {
             int type = sc.nextInt();
-            ShapeType enumInstance = ShapeType.values()[type];
+            ShapeType enumInstance = ShapeType.values()[type-1];
             if (enumInstance == null) {
                 System.out.println("Occur Exception: Incorrect option value!");
             } else {
@@ -108,12 +142,27 @@ public class Shell {
 
     public void displayUsingNameFilter() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter part name");
+        System.out.print("Enter part name: ");
         String partName = sc.next();
 
         DatabaseApp.shapes.stream()
                 .filter(shape ->
                         shape.getName().contains(partName))
                 .forEach(shape -> System.out.println(shape.toString()));
+    }
+
+    public void calculateAreas(){
+        DatabaseApp.shapes.forEach(Shape::calculateArea);
+        System.out.println("Areas calculated");
+    }
+
+    public void calculateValume(){
+        DatabaseApp.shapes.forEach(Shape::calculateValume);
+        System.out.println("Valumes calculated");
+    }
+
+    public void calculateCircumference(){
+        DatabaseApp.shapes.forEach(Shape::calculateCircumference);
+        System.out.println("Circumferences calculated");
     }
 }

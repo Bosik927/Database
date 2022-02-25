@@ -14,9 +14,9 @@ public class DatabaseApp {
     public static void main(String... args) {
         shell.printManu();
         int option = 0;
-        while(option!=7){
+        while (option != 7) {
             option = shell.getOptionNumber();
-            switch(option) {
+            switch (option) {
                 case 0:
                     break;
                 case 1:
@@ -38,6 +38,15 @@ public class DatabaseApp {
                     shell.printManu();
                     break;
                 case 7:
+                    break;
+                case 8:
+                    shell.calculateAreas();
+                    break;
+                case 9:
+                    shell.calculateValume();
+                    break;
+                case 10:
+                    shell.calculateCircumference();
                     break;
                 default:
                     System.out.println("Unknown operation!");

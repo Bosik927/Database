@@ -39,4 +39,10 @@ public abstract class Shape2D extends Shape {
     public String toString(){
         return super.toString() + " a: " + getA() + " b: " + getB();
     }
+
+    @Override
+    public void calculateValume(){
+
+    }
+
 }

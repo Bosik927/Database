@@ -1,10 +1,10 @@
 package com.piotr.zajdzinski.shapes;
 
 public enum ShapeType {
-    SPHERE(4),
     TRIANGLE(1),
     RECTANGLE(2),
-    CUBOID(3);
+    CUBOID(3),
+    SPHERE(4);
 
     public final int num;
 

@@ -7,6 +7,7 @@ public abstract class Shape {
     private long id;
     private double area;
     private double circumference;
+    private ShapeType shapeType;
 
     public Shape(String name, long id){
         this.name = name;
@@ -14,7 +15,11 @@ public abstract class Shape {
     }
 
     public String toString(){
-        return "Id: " + id + "Name: " + name + " Area " + area + " Circumference: " + circumference;
+        return "ShapeType: "+ shapeType + " Id: " + id + " Name: " + name;
+    }
+
+    public void setShapeType(ShapeType shapeType) {
+        this.shapeType = shapeType;
     }
 
     public String getName() {
@@ -33,8 +38,18 @@ public abstract class Shape {
         this.circumference = circumference;
     }
 
+    public double getArea() {
+        return area;
+    }
+
+    public double getCircumference() {
+        return circumference;
+    }
+
+
     public abstract ShapeType getType();
     public abstract void calculateArea();
     public abstract void calculateCircumference();
+    public abstract void calculateValume();
 
 }

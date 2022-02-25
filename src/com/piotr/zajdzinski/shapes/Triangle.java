@@ -1,12 +1,13 @@
 package com.piotr.zajdzinski.shapes;
 
 public class Triangle extends Shape2D{
-    private double height;
+
     private double c;
 
-    public Triangle(String name, long id, double a, double b, double height){
+    public Triangle(String name, long id, double a, double b, double c){
         super(name, id, a, b);
-        this.height = height;
+        setShapeType(ShapeType.TRIANGLE);
+        this.c = c;
     }
 
     public ShapeType getType(){
@@ -15,7 +16,8 @@ public class Triangle extends Shape2D{
 
     @Override
     public void calculateArea() {
-        setArea((getA() * height)/2);
+        double s = (getA()+getB() + c)/2;
+        setArea(Math.sqrt(s * (s-getA()) * (s-getB())* (s-c)));
     }
 
     @Override
@@ -24,7 +26,7 @@ public class Triangle extends Shape2D{
     }
 
     public String toString(){
-        return super.toString() + " height: " + height;
+        return super.toString() + " c: " + c + " area: " + getArea() + " " + " Circumference " + getCircumference();
     }
 
 
